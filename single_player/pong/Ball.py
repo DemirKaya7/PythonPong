@@ -60,7 +60,7 @@ class Ball():
         distance = sqrt( (dist_x * dist_x) + (dist_y * dist_y) )
 
         # If the distance is less than the radius, collision!
-        if distance <= self.radius:        
+        if distance <= self.radius:
             if not self.currently_intersects:
                 self.currently_intersects = True
     

@@ -30,7 +30,7 @@ def draw():
     #    Do you see the paddle on the screen?
 
     # 11. Finish the code in keyPressed() and keyReleased() first!
-    #     Call the ball boject's collision() method and pass the
+    #     Call the ball object's collision() method and pass the
     #     paddle object as an input variable.
     #     Does the ball bounce off the paddel?
 
@@ -41,7 +41,8 @@ def draw():
     # *EXTRA*
     # Can you figure out how to make a 2 player pong game with paddles on
     # the left and right on the screen?
-
+    
+    pass
 
 # 9. Change paddle.x_speed when the LEFT or RIGHT arrow keys are pressed.
 #    Does the paddle move?
