@@ -11,11 +11,11 @@ class Ball():
         self.radius = radius
         self.color_index = 0
         self.ball_color = color_progression[self.color_index]
-        self.x_speed = self.speed
+        self.x_speed = random(-self.speed, self.speed)
         self.y_speed = self.speed
         self.currently_intersects = False
         
-    def update(self):        
+    def update(self):
         if self.x + self.radius > width or self.x - self.radius < 0:
             self.x_speed = -self.x_speed
             
@@ -29,7 +29,10 @@ class Ball():
         push()
         
         strokeWeight(5)
-        fill(color_progression[self.color_index])
+        if self.color_index >= len(color_progression):
+            fill(random(255), random(255), random(255))
+        else:
+            fill(color_progression[self.color_index])
         ellipse(self.x, self.y, 2 * self.radius, 2 * self.radius)
         
         pop()
@@ -67,13 +70,10 @@ class Ball():
                 self.x_speed += 2
                 self.y_speed += 2
                 
-                if self.color_index >= len(color_progression):
-                    self.ball_color = color(random(255), random(255), random(255));
-                else:
+                if self.color_index < len(color_progression):
                     self.ball_color = color_progression[self.color_index]
     
-                if self.color_index < len(color_progression) - 1:
-                    self.color_index += 1
+                self.color_index += 1
     
                 if side == 'right' or side == 'left':
                     self.x_speed = -self.x_speed
