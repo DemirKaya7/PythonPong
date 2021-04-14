@@ -8,19 +8,18 @@ started = False
 
 def setup():
     # 1. Set the size of your window to at least width = 800, height = 600
-
+    size(800, 600)
     # 2. Make a global ball variable, for example:
     #    global ball
-    
+    global ball
     # 3. Initialize your ball variable to a new Ball(), for example:
     #    ball = Ball(x_position)
-    
+    ball = Ball(x = 50, y = 50)
     # 4. Make a global paddle variable.
-    
+    global paddle
     # 5. Initialize your paddle variable to a new Paddle() for example:
     #    paddle = Paddle(x_position)
-    
-    pass
+    paddle = Paddle(0)
 
     
 def draw():
@@ -36,9 +35,13 @@ def draw():
 
     # 7. Call the ball object's update() and draw() methods.
     #    Do you see the ball moving on the screen?
+    ball.update()
+    ball.draw()
 
     # 8. Call the paddle object's update() and draw() methods.
     #    Do you see the paddle on the screen?
+    paddle.update()
+    paddle.draw()
 
     # 11. Finish the code in keyPressed() and keyReleased() first!
     #     Call the ball object's collision() method and pass the
