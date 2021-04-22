@@ -37,7 +37,7 @@ class Ball():
         
         pop()
 
-    def collision(self, paddle):
+    def collision(self, paddle, score):
         side = None
 
         # Temporary variables to set edges for testing
@@ -79,9 +79,14 @@ class Ball():
                     self.x_speed = -self.x_speed
                 else:
                     self.y_speed = -self.y_speed
+                    
+                score = score + 1
+                return score
+                    
         else:
             # Sometimes upon first collision the ball would still be within
             # the paddle, causing the ball to rebound back and forth.
             # Resetting the variable here ensures there's only 1 change of
-            # direction until the ball and paddle no longer intersect 
+            # direction until the ball and paddle no longer intersect
             self.currently_intersects = False
+            return score
