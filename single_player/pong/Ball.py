@@ -11,15 +11,16 @@ class Ball():
         self.radius = radius
         self.color_index = 0
         self.ball_color = color_progression[self.color_index]
-        self.x_speed = random(-self.speed, self.speed)
-        self.y_speed = self.speed
+        self.x_speed = self.speed
+        self.y_speed = random(-self.speed, self.speed)
         self.currently_intersects = False
         
     def update(self):
-        if self.x + self.radius > width or self.x - self.radius < 0:
-            self.x_speed = -self.x_speed
-            
+    
         if self.y + self.radius < 0:
+            self.y_speed = -self.y_speed
+        
+        if self.y + self.radius > height:
             self.y_speed = -self.y_speed
             
         self.x += self.x_speed
@@ -43,7 +44,6 @@ class Ball():
         # Temporary variables to set edges for testing
         edge_x = self.x
         edge_y = self.y
-
         if self.x < paddle.x:
             edge_x = paddle.x                  # Ball is left of the paddle
             side = 'left'
@@ -57,6 +57,7 @@ class Ball():
             edge_y = paddle.y + paddle.height  # Ball is below the paddle
             side = 'bottom'
 
+
         # Get distance from pythagoream theorem
         dist_x = self.x - edge_x
         dist_y = self.y - edge_y
@@ -66,7 +67,7 @@ class Ball():
         if distance <= self.radius:
             if not self.currently_intersects:
                 self.currently_intersects = True
-    
+                print("hit")
                 self.x_speed += 2
                 self.y_speed += 2
                 
@@ -76,6 +77,7 @@ class Ball():
                 self.color_index += 1
     
                 if side == 'right' or side == 'left':
+                    
                     self.x_speed = -self.x_speed
                 else:
                     self.y_speed = -self.y_speed

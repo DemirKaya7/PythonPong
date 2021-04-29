@@ -23,11 +23,14 @@ def setup():
     paddle = Paddle(0)
     paddle2 = Paddle(x=width-20)
     
-    global score
-    score = 0
+    global score1
+    score1 = 0
+    global score2
+    score2 = 0
     
 def draw():
-    global score
+    global score1
+    global score2
     if not started:
         textSize(32)
         fill(0)
@@ -54,17 +57,24 @@ def draw():
     #     Call the ball object's collision() method and pass the
     #     paddle object as an input variable.
     #     Does the ball bounce off the paddel?
-    score = ball.collision(paddle, score)
+    if ball.x > width/2:
+        score2 = ball.collision(paddle2, score2)
+    else:
+        score1 = ball.collision(paddle, score1)
 
     # 12. End the game when the ball goes below the bottom of the screen.
     #     You can use noLoop() to freeze the game and text() to print text
     #     on the screen.
     fill(255, 255, 255)
-    text("Score = " + str(score), 50, 50)
-    if ball.y > 600:
+    text("Score 1 = " + str(score1), 50, 50)
+    text("Score 2 = " + str(score2), 550, 50)
+    if ball.x > 800 or ball.x < 0:
         noLoop()
         fill(255, 255, 255)
-        text("You Lose!", width/2 - 75, height/2 - 100)
+        if(score1 > score2):
+            text("Player 1 Wins!", width/2 - 75, height/2 - 100)
+        else:
+            text("Player 2 Wins!", width/2 - 75, height/2 - 100)
 
     # 13. Figure out how to add a score to the game so every bounce off
     #     the paddle increases the player socre
@@ -85,9 +95,9 @@ def keyPressed():
             paddle2.y_speed = -10
         if keyCode == DOWN:
             paddle2.y_speed = 10
-    if keyCode == ord("w"):
+    if keyCode == 87:
             paddle.y_speed = -10
-    if keyCode == ord("s"):
+    if keyCode == 83:
             paddle.y_speed = 10
 
 
@@ -96,6 +106,6 @@ def keyPressed():
 def keyReleased():
     if key == CODED:
         if keyCode == UP or keyCode == DOWN:
-            paddle.y_speed = 0
-    if keyCode == ord("w") or keyCode == ord("s"):
             paddle2.y_speed = 0
+    if keyCode == 87 or keyCode == 83:
+        paddle.y_speed = 0
